@@ -1,10 +1,10 @@
-
 import { useState } from "react";
 
 export default function Login(){
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
 
   const handleSubmit = async (event) => {
@@ -28,7 +28,7 @@ export default function Login(){
 
       if (response.ok) {
         // Si la respuesta es exitosa, redirecciona a otra página
-        window.location.href = '/dashboard';
+        window.location.href = '/side-navigation';
       } else {
         // Si la respuesta no es exitosa, muestra un mensaje de error
         setError('Credenciales incorrectas. Por favor, intenta de nuevo.');
@@ -39,6 +39,10 @@ export default function Login(){
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  
   return (
     <div className="w-full relative bg-white overflow-hidden flex flex-row items-start justify-start py-0 pr-[31px] pl-0 box-border gap-[132px] tracking-[normal] text-center text-[80px] text-black font-poppins mq750:gap-[132px_66px] mq450:gap-[132px_33px] mq1125:flex-wrap mq1125:p-5 mq1125:box-border">
       <div className="w-[597px] flex flex-row items-start justify-start relative min-w-[597px] max-w-full mq750:min-w-full mq1125:flex-1">
@@ -65,7 +69,7 @@ export default function Login(){
               alt=""
               src="/avatar@2x.png"
             />
-            <div className="self-stretch flex flex-row items-start justify-start max-w-full">
+            <div className="self-stretch flex flex-row" style={{ alignItems: 'center', justifyContent: 'center' }}>
               <div className="w-[580px] shadow-[0px_4px_25px_rgba(0,_0,_0,_0.25)] flex flex-col items-start justify-start pt-[88px] px-[54px] pb-[138px] box-border relative gap-[61px] max-w-full z-[3] mq750:gap-[30px_61px] mq750:pt-[57px] mq750:px-[27px] mq750:pb-[90px] mq750:box-border mq450:gap-[15px_61px]">
                 <div className="w-full h-full absolute !m-[0] top-[0px] right-[0px] bottom-[0px] left-[0px] rounded-[10px] bg-white" />
                 <h1 className="m-0 self-stretch h-[104px] relative text-inherit leading-[48px] font-bold font-inherit flex items-center shrink-0 z-[1] mq450:text-[24px] mq450:leading-[19px] mq1050:text-[40px] mq1050:leading-[29px]">
@@ -104,29 +108,27 @@ export default function Login(){
                           <input
                             className="w-full [border:none] [outline:none] font-poppins text-sm bg-[transparent] h-5 flex-1 relative leading-[20px] text-gray-100 text-left inline-block overflow-hidden text-ellipsis whitespace-nowrap min-w-[250px] max-w-full p-0"
                             placeholder="Ingresa tu contraseña"
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             name="password"
                             id="password"
+                            value={password}
                             onChange={(e) => setPassword(e.target.value)}
                           />
                         </div>
-                        <img
-                          className="w-[23px] h-[23px] absolute !m-[0] right-[11.6px] bottom-[29.2px] overflow-hidden shrink-0 z-[3]"
-                          loading="lazy"
-                          alt=""
-                          src="/iconamooneye.svg"
-                        />
+                        <div className="icon-container" onClick={togglePasswordVisibility} style={{ cursor: 'pointer' }}>
+                          <img
+                            className="w-[23px] h-[23px] absolute !m-[0] right-[11.6px] bottom-[34px] overflow-hidden shrink-0 z-[3]"
+                            loading="lazy"
+                            alt=""
+                            src="/iconamooneye.svg"
+                          />
+                        </div>
                       </div>
                     </div>
-                    <div className="self-stretch flex flex-row items-start justify-end py-0 pr-[48.8px] pl-[50px] box-border max-w-full mq750:pl-[25px] mq750:pr-6 mq750:box-border">
+                    <div className="self-stretch flex flex-row items-start justify-end py- pr-[48.8px] pl-[50px] box-border max-w-full mq750:pl-[85px] mq750:pr-6 mq750:box-border">
                       <div className="flex-1 overflow-hidden flex flex-row items-start justify-start gap-[12px] max-w-full z-[1] mq750:flex-wrap">
-                        <button className="cursor-pointer py-3 px-[9px] bg-[transparent] rounded-lg flex flex-row items-start justify-start whitespace-nowrap border-[1px] border-solid border-royalblue-200 hover:bg-royalblue-300 hover:box-border hover:border-[1px] hover:border-solid hover:border-royalblue-100">
-                          <div className="relative text-base leading-[24px] font-medium font-roboto text-royalblue-200 text-left">
-                            Recuperar contraseña
-                          </div>
-                        </button>
-                        <button className="cursor-pointer [border:none] py-3 px-[59.2px] bg-royalblue-200 rounded-lg flex flex-row items-start justify-start hover:bg-royalblue-100">
-                          <div className="relative text-base leading-[24px] font-medium font-roboto text-white text-left inline-block min-w-[60px]">
+                        <button className="cursor-pointer py-4 px-[150px] bg-royalblue-200 rounded-lg flex flex-row items-start justify-start hover:bg-royalblue-100">
+                          <div className="relative text-base leading-[20px] font-medium font-poppins text-white text-left inline-block min-w-[px]">
                             Ingresar
                           </div>
                         </button>
@@ -137,7 +139,7 @@ export default function Login(){
               </div>
             </div>
           </div>
-          <footer className="w-[579px] flex flex-row items-start justify-center py-0 px-5 box-border max-w-full text-center text-[20px] text-black font-poppins">
+          <footer className="w-[1024px] flex flex-row items-start justify-center py-0 px-5 box-border max-w-full text-center text-[20px] text-black font-poppins">
             <h3 className="m-0 w-[317px] relative text-inherit leading-[28px] font-normal font-inherit flex items-center justify-center z-[3] mq450:text-base mq450:leading-[22px]">
               Copyright © Transportes G@GO
             </h3>

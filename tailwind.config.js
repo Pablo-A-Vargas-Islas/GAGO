@@ -9,6 +9,7 @@ module.exports = {
       colors: {
         white: "#fff",
         black: "#000",
+        royalblue1: "#144dc1",
         royalblue: {
           "100": "#3b73e8",
           "200": "#144dc1",
@@ -18,6 +19,9 @@ module.exports = {
           "100": "rgba(0, 0, 0, 0.5)",
           "200": "rgba(0, 0, 0, 0.1)",
         },
+        lightgray: "#d5d5d5",
+        whitesmoke: "#eee",
+        forestgreen: "#169e24",
       },
       spacing: {},
       fontFamily: {
@@ -26,10 +30,14 @@ module.exports = {
       },
       borderRadius: {
         "31xl": "50px",
+        "6xl": "25px",
       },
     },
     fontSize: {
+      xl: "20px",
       base: "16px",
+      "5xl": "24px",
+      lgi: "19px",
       sm: "14px",
       inherit: "inherit",
     },
